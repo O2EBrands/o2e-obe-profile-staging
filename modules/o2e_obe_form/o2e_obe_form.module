@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * @file
+ * Hooks for form alterations.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function o2e_obe_form_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (isset($form['#webform_id']) && $form['#webform_id'] === 'o2e_webform') {
+    $tempstore_service = \Drupal::service('tempstore.private')->get('o2e_obe_salesforce');
+    $current_page = $form_state->get('current_page');
+    $page_array = !empty($form_state->get('pages')) ? array_keys($form_state->get('pages')) : [];
+    foreach ($page_array as $page) {
+      if ($current_page === $page) {
+        if (isset($form['elements'][$current_page]['service_id'])) {
+          // Populate Service ID.
+          $serviceId = $tempstore_service->get('response');
+          $form['elements'][$current_page]['service_id']['#default_value'] = $serviceId['service_id'];
+        }
+        if (isset($form['elements'][$current_page]['address'])) {
+          $form['elements'][$current_page]['address']['#after_build'][] = '_update_address';
+        }
+      }
+    }
+
+    // Brand name attached to drupalSettings.
+    $brand_name = \Drupal::config('o2e_obe_common.settings')->get('o2e_obe_common.brand');
+    $form['#attached']['drupalSettings']['brand_name'] = (!empty($brand_name)) ? $brand_name : 'default';
+  }
+}
+
+/**
+ * Custom function to hide country field.
+ */
+function _update_address($element, FormStateInterface $form_state) {
+  $element['country']['#attributes']['hidden'] = TRUE;
+  return $element;
+}
+
+/**
+ * Custom Redirection of form after 15 mins expiry.
+ */
+function goto_step($page, $pages, FormStateInterface $form_state) {
+  // Convert associative array to index for easier manipulation.
+  $all_keys = array_keys($pages);
+  $goto_destination_page_index = array_search($page, $all_keys);
+  if ($goto_destination_page_index > 0) {
+    // The backend pointer for page will add 1 so to go our page we must -1.
+    $submission = $form_state->getFormObject()->getEntity();
+    $submission->setCurrentPage($all_keys[$goto_destination_page_index])->save();
+    $form_state->set('current_page', $all_keys[$goto_destination_page_index]);
+    $form_state->setRebuild();
+  }
+}

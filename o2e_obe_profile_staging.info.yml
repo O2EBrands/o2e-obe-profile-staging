@@ -1,0 +1,62 @@
+name: O2E OBE Profile Staging
+type: profile
+description: 'This Drupal installation profile is used to create the D9 OBEs.'
+core_version_requirement: '^9'
+
+# Modules to install to support the profile.
+install:
+  - admin_toolbar
+  - admin_toolbar_tools
+  - block_content
+  - breakpoint
+  - ckeditor
+  - config
+  - contextual
+  - dblog
+  - editor
+  - field
+  - field_ui
+  - file
+  - filter
+  - help
+  - history
+  - image
+  - layout_builder
+  - layout_builder_admin_theme
+  - layout_builder_modal
+  - layout_builder_operation_link
+  - layout_builder_restrictions
+  - layout_builder_restrictions_by_region
+  - layout_discovery
+  - link
+  - options
+  - path
+  - path_alias
+  - quickedit
+  - rdf
+  - shortcut
+  - system
+  - text
+  - toolbar
+  - webform_ui
+  - config_ignore
+
+# Required modules
+# Note that any dependencies of the modules listed here will be installed automatically.
+dependencies:
+  - block
+  - node
+  - user
+  - views
+  - o2e_obe_common
+  - webform
+  - o2e_obe_form
+  - reroute_email
+
+# List any themes that should be installed as part of the profile installation.
+# Note that this will not set any theme as the default theme.
+themes:
+  - bootstrap_barrio
+  - o2e_obe_subtheme
+  - claro
+  - olivero

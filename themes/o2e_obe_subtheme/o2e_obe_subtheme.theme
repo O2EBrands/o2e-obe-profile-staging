@@ -1,0 +1,44 @@
+<?php
+
+/**
+ * @file
+ * Functions to support theming in the SASS Starterkit subtheme.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_system_theme_settings_alter() for settings form.
+ *
+ * Replace Barrio setting options with subtheme ones.
+ */
+function o2e_obe_subtheme_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
+  $form['components']['navbar']['bootstrap_barrio_navbar_top_background']['#options'] = array(
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  );
+  $form['components']['navbar']['bootstrap_barrio_navbar_background']['#options'] = array(
+    'bg-primary' => t('Primary'),
+    'bg-secondary' => t('Secondary'),
+    'bg-light' => t('Light'),
+    'bg-dark' => t('Dark'),
+    'bg-white' => t('White'),
+    'bg-transparent' => t('Transparent'),
+  );
+}
+
+/**
+ * Implements template_preprocess_container() for settings form.
+ *
+ * Attach datepicker dependencies to the webform field.
+ */
+
+function o2e_obe_subtheme_preprocess_container(&$variables) {
+  if (isset($variables['element']['#webform_id']) && $variables['element']['#webform_id'] === 'o2e_webform--react_datepicker_component') {
+    $variables['#attached']['library'][] = 'o2e_obe_subtheme/o2e-datepicker';
+  }
+}

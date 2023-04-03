@@ -1,0 +1,63 @@
+{
+  "name": "barrio_sass",
+  "version": "5.1.0",
+  "description": "Barrio SASS implementation",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "preinstall": "npx npm-force-resolutions"
+  },
+  "resolutions": {
+    "glob-parent": "^6.0.1",
+    "css-what": ">=5.0.1",
+    "qs": ">=6.2.4",
+    "engine.io": ">=6.2.1",
+    "decode-uri-component": ">=0.2.1",
+    "json5": ">=2.2.2",
+    "ua-parser-js": ">=1.0.33"
+  },
+  "keywords": [
+    "SASS",
+    "Bootstrap",
+    "Drupal",
+    "Barrio"
+  ],
+  "author": "@hatuhay",
+  "license": "MIT",
+  "dependencies": {
+    "@popperjs/core": "^2.9.2",
+    "ansi-styles": "^6.1.0",
+    "bootstrap": "^5.1.0",
+    "bootstrap-icons": "^1.4.0"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.24.7",
+    "del": "^3.0.0",
+    "gulp": "^4.0.0",
+    "gulp-autoprefixer": "^8.0.0",
+    "gulp-clean-css": "3.9.4",
+    "gulp-concat": "^2.6.1",
+    "gulp-html-replace": "^1.6.2",
+    "gulp-load-plugins": "^2.0.4",
+    "gulp-postcss": "^9.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^5.0.0",
+    "gulp-sourcemaps": "^2.6.4",
+    "gulp-uglify": "^3.0.0",
+    "merge-stream": "^1.0.1",
+    "postcss-inline-svg": "^5.0.0",
+    "postcss-pxtorem": "^5.1.1",
+    "sass": "^1.45.0"
+  },
+  "browserslist": [
+    "Chrome >= 35",
+    "Firefox >= 38",
+    "Edge >= 12",
+    "Explorer >= 10",
+    "iOS >= 8",
+    "Safari >= 8",
+    "Android 2.3",
+    "Android >= 4",
+    "Opera >= 12"
+  ]
+}
